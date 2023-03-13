@@ -19,7 +19,7 @@ public class Utils {
         System.out.println("Введите годовой оборот организации double:");
         organization.setAnnualTurnover(scanner.nextDouble());
         System.out.println("Введите тип организации(COMMERCIAL, PUBLIC, TRUST):");
-        organization.setType(OrganizationType.valueOf(getName(scanner).toUpperCase(Locale.ENGLISH).trim()));
+        organization.setType(getType(scanner));
         System.out.println("Введите адрес организации(имя и 3 координаты long long float):");
        organization.setOfficialAddress(new Address(getName(scanner), new Location(getId(scanner), getId(scanner), ((float)getId(scanner)))));
         return organization;
@@ -38,13 +38,23 @@ public class Utils {
             }
         }
     }
-
+    private static OrganizationType getType(Scanner scanner) {
+        while (true) {
+            String s = scanner.nextLine();
+          try{  if (s != null && s.length() > 0) {
+                return OrganizationType.valueOf(s.toUpperCase(Locale.ENGLISH).trim());
+            }}
+            catch (IllegalArgumentException e) {
+                System.out.println("Incorrect input!"); }
+        }
+    }
     private static String getName(Scanner scanner) {
         while (true) {
             String s = scanner.nextLine();
-            if (s != null && s.length() > 0) {
+           if (s != null && s.length() > 0) {
                 return s;
             }
+
         }
     }
 }
