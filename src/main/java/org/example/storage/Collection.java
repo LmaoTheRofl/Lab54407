@@ -79,6 +79,9 @@ public class Collection {
     public ArrayDeque<Organization> getAll() {
         return collection;
     }
+    public void removeById(long id) {
+        collection.removeIf(e -> String.valueOf(e.getId()).equals(String.valueOf(id)));
+    }
 
     public void add(Organization organization) {
         organization.setId(generateId());
@@ -91,5 +94,8 @@ public class Collection {
                 .max(Comparator.comparing(Long::longValue))
                 .orElse(0L);
         return ++id;
+    }
+    public void remove(Organization organization) {
+        collection.remove(organization);
     }
 }

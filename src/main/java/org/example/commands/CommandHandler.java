@@ -11,7 +11,11 @@ public class CommandHandler {
             new Show(),
             new Exit(),
             new ExecuteScript(),
-            new Save()
+            new Save(),
+            new AddIfMin(),
+            new ShowMaxCreationDateElement(),
+            new ShowFirst(),
+            new RemoveById()
     );
 
     public String execute(String commandLine) {
