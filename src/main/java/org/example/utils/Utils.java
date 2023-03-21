@@ -17,7 +17,7 @@ public class Utils {
         organization.setCoordinates(new Coordinates(((float) getId(scanner)), ((double)getId(scanner))));
         organization.setCreationDate(Date.from(Instant.now()));
         System.out.println("Введите годовой оборот организации double:");
-        organization.setAnnualTurnover(scanner.nextDouble());
+        organization.setAnnualTurnover(((double)getId(scanner)));
         System.out.println("Введите тип организации(COMMERCIAL, PUBLIC, TRUST):");
         organization.setType(getType(scanner));
         System.out.println("Введите адрес организации(имя и 3 координаты long long float):");
