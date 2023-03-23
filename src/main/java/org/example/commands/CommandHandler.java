@@ -15,7 +15,11 @@ public class CommandHandler {
             new AddIfMin(),
             new ShowMaxCreationDateElement(),
             new ShowFirst(),
-            new RemoveById()
+            new RemoveById(),
+            new ShowInfo(),
+            new UpdateById(),
+            new PrintAscending(),
+            new GroupCountingByType()
     );
 
     public String execute(String commandLine) {

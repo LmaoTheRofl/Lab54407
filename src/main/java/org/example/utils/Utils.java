@@ -13,19 +13,58 @@ public class Utils {
         Organization organization = new Organization();
         System.out.println("Введите имя организации:");
         organization.setName(getName(scanner));
-        System.out.println("Введите координаты организации(2 координаты float, double):");
-        organization.setCoordinates(new Coordinates(((float) getId(scanner)), ((double)getId(scanner))));
+        System.out.println("Введите координаты организации(2 координаты Integer, double):");
+        organization.setCoordinates(new Coordinates(getIntegerId(scanner), getDoubleId((scanner))));
         organization.setCreationDate(Date.from(Instant.now()));
         System.out.println("Введите годовой оборот организации double:");
-        organization.setAnnualTurnover(((double)getId(scanner)));
+        organization.setAnnualTurnover(getDoubleId((scanner)));
         System.out.println("Введите тип организации(COMMERCIAL, PUBLIC, TRUST):");
         organization.setType(getType(scanner));
         System.out.println("Введите адрес организации(имя и 3 координаты long long float):");
-       organization.setOfficialAddress(new Address(getName(scanner), new Location(getId(scanner), getId(scanner), ((float)getId(scanner)))));
+       organization.setOfficialAddress(new Address(getName(scanner), new Location(getLongId(scanner), getLongId(scanner), getFloatId(scanner))));
         return organization;
     }
 
-    private static long getId(Scanner scanner) {
+    private static float getFloatId(Scanner scanner) {
+        while (true) {
+            String s = scanner.nextLine();
+            try {
+                float l = Float.parseFloat(s);
+                if (l > 0) {
+                    return l;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Incorrect input!");
+            }
+        }
+    }
+    private static Integer getIntegerId(Scanner scanner) {
+        while (true) {
+            String s = scanner.nextLine();
+            try {
+                Integer l = Integer.valueOf(s);
+                if (l > 0) {
+                    return l;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Incorrect input!");
+            }
+        }
+    }
+    private static double getDoubleId(Scanner scanner) {
+        while (true) {
+            String s = scanner.nextLine();
+            try {
+                double l = Double.parseDouble(s);
+                if (l > 0) {
+                    return l;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Incorrect input!");
+            }
+        }
+    }
+    private static long getLongId(Scanner scanner) {
         while (true) {
             String s = scanner.nextLine();
             try {
@@ -51,8 +90,10 @@ public class Utils {
     private static String getName(Scanner scanner) {
         while (true) {
             String s = scanner.nextLine();
-           if (s != null && s.length() > 0) {
-                return s;
+           if (s != null && !s.isEmpty()) {
+               String[] x = s.split(" ");
+               if(x.length>=1) {
+                return s; }
             }
 
         }

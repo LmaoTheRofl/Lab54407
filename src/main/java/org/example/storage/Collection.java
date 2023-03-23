@@ -2,16 +2,19 @@ package org.example.storage;
 
 import com.google.gson.Gson;
 import org.example.organization.Organization;
+import org.example.utils.Utils;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.attribute.FileTime;
 import java.sql.Date;
 import java.time.Instant;
-import java.util.ArrayDeque;
-import java.util.Comparator;
+import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Collection {
-    private final ArrayDeque<Organization> collection;
+    private ArrayDeque<Organization> collection;
 
     private static Collection INSTANCE;
 
@@ -57,14 +60,16 @@ public class Collection {
     }
 
     /**
-     * Валидация полей организации
+     * Валидация? полей организации
      * @param organization организазция для проверки
      * @return результат валидации
      */
     private boolean validate(Organization organization) {
+        String[] x = organization.getName().split(" ");
         if (organization.getId() == 0) {
             return false;
         }
+
         return true;
     }
 
@@ -75,6 +80,13 @@ public class Collection {
     public void clear() {
         collection.clear();
     }
+    public FileTime getFileCreationDate(String fileName) {
+        try {
+            return (FileTime) Files.getAttribute((new File(fileName)).toPath(), "creationTime");
+        } catch (IOException e) {
+            return null;
+        }
+    }
 
     public ArrayDeque<Organization> getAll() {
         return collection;
@@ -82,11 +94,30 @@ public class Collection {
     public void removeById(long id) {
         collection.removeIf(e -> String.valueOf(e.getId()).equals(String.valueOf(id)));
     }
+    public void updateById(long id) {
+        collection.removeIf(e -> String.valueOf(e.getId()).equals(String.valueOf(id)));
+         Organization organization = Utils.readOrganization();
+         organization.setId(id);
+        collection.add(organization);
+    }
 
     public void add(Organization organization) {
         organization.setId(generateId());
         collection.add(organization);
     }
+    public void sortAscending() {
+        ArrayDeque<Organization>  y = new ArrayDeque<Organization>();
+        List<Organization> x = new ArrayList<Organization>(collection).stream().sorted(Comparator.comparing(Organization::getAnnualTurnover)).collect(Collectors.toList());
+      y.addAll(x);
+        this.collection = y;
+
+}
+public void sortByType() {
+    ArrayDeque<Organization>  y = new ArrayDeque<Organization>();
+    List<Organization> x = new ArrayList<Organization>(collection).stream().sorted(Comparator.comparing(Organization::getType)).collect(Collectors.toList());
+    y.addAll(x);
+    this.collection = y;
+}
 
     private long generateId() {
         Long id = collection.stream()
@@ -95,7 +126,5 @@ public class Collection {
                 .orElse(0L);
         return ++id;
     }
-    public void remove(Organization organization) {
-        collection.remove(organization);
-    }
+
 }
