@@ -9,7 +9,10 @@ import java.util.Optional;
 import static org.example.utils.Utils.readOrganization;
 
 public class AddIfMax implements Command {
-
+    /**
+     * добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции
+     * @return element was added
+     */
     @Override
     public String execute() {
         Organization organization = readOrganization();

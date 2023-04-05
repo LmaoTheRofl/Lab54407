@@ -8,6 +8,10 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class ExecuteScript implements Command{
+    /**
+     * считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
+     * @return Script executed!
+     */
     @Override
     public String execute() {
         Scanner scanner = new Scanner(System.in);

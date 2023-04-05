@@ -10,7 +10,6 @@ import java.nio.file.attribute.FileTime;
 import java.sql.Date;
 import java.time.Instant;
 import java.util.*;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Collection {
@@ -42,6 +41,7 @@ public class Collection {
             Organization[] organizations = gson.fromJson(json, Organization[].class);
             for (Organization organization : organizations) {
                 if (validate(organization)) {
+                    organization.setId(generateId());
                     organization.setCreationDate(Date.from(Instant.now()));
                     collection.add(organization);
                 }
@@ -65,11 +65,20 @@ public class Collection {
      * @return результат валидации
      */
     private boolean validate(Organization organization) {
-        String[] x = organization.getName().split(" ");
-        if (organization.getId() == 0) {
-            return false;
-        }
-
+        if (organization.getId() == null || organization.getId() <= 0) {
+            return false;}
+        if(organization.getName().trim().isEmpty()) {
+            return false;}
+        if(organization.getCoordinates().getY() > 274){
+            return false;}
+        if(organization.getAnnualTurnover()<=0) {
+            return false;}
+        if(organization.getCreationDate()==null) {
+            return false;}
+        if(organization.getType()==null) {
+            return false;}
+        if(organization.getOfficialAddress().getStreet() == null || organization.getOfficialAddress().getStreet().length()>83 || organization.getOfficialAddress().getTown() == null){
+            return false;}
         return true;
     }
 
@@ -119,7 +128,7 @@ public void sortByType() {
     this.collection = y;
 }
 
-    private long generateId() {
+    private Long generateId() {
         Long id = collection.stream()
                 .map(Organization::getId)
                 .max(Comparator.comparing(Long::longValue))

@@ -1,6 +1,9 @@
 package org.example.commands;
 
 public class Help implements Command{
+    /**
+     * @return  справка по доступным командам
+     */
     @Override
     public String execute() {
         return "help : вывести справку по доступным командам\n" +

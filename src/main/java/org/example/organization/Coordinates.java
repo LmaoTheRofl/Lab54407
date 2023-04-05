@@ -5,12 +5,20 @@ package org.example.organization;
  */
 public class Coordinates {
     // Поле [ранящее значение x
-    private Integer x; //Поле не может быть null
-    private double y; //Максимальное значение поля: 274
+    private float x; //Поле не может быть null
+    private long y; //Максимальное значение поля: 274
 
-    public Coordinates(Integer x, double y) {
+    public Coordinates(float x, long y) {
         this.x = x;
         this.y = y;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public long getY() {
+        return y;
     }
 
     @Override

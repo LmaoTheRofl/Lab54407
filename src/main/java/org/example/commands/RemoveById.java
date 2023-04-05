@@ -5,6 +5,10 @@ import org.example.storage.Collection;
 import java.util.Scanner;
 
 public class RemoveById implements Command{
+    /**
+     *  удалить элемент из коллекции по его id
+     * @return Element removed
+     */
     @Override
     public String execute() {
         Scanner scanner = new Scanner(System.in);

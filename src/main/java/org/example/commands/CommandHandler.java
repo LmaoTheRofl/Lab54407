@@ -22,6 +22,11 @@ public class CommandHandler {
             new GroupCountingByType()
     );
 
+    /**
+     * выполнить команду по названию
+     * @param commandLine
+     * @return command.execute()
+     */
     public String execute(String commandLine) {
         for (Command command : commands) {
             if (command.getCommandName().equals(commandLine)) {

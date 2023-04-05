@@ -3,15 +3,15 @@ package org.example.organization;
 import java.util.Date;
 
 public class Organization {
-    private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private Long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
     private java.util.Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    private double annualTurnover; //Значение поля должно быть больше 0
+    private long annualTurnover; //Значение поля должно быть больше 0
     private OrganizationType type; //Поле не может быть null
     private Address officialAddress; //Поле не может быть null
 
-    public Organization(long id, String name, Coordinates coordinates, Date creationDate, double annualTurnover, OrganizationType type, Address officialAddress) {
+    public Organization(long id, String name, Coordinates coordinates, Date creationDate, long annualTurnover, OrganizationType type, Address officialAddress) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -24,11 +24,11 @@ public class Organization {
     public Organization() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -56,11 +56,11 @@ public class Organization {
         this.creationDate = creationDate;
     }
 
-    public double getAnnualTurnover() {
+    public long getAnnualTurnover() {
         return annualTurnover;
     }
 
-    public void setAnnualTurnover(double annualTurnover) {
+    public void setAnnualTurnover(long annualTurnover) {
         this.annualTurnover = annualTurnover;
     }
 

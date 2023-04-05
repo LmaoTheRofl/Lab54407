@@ -6,6 +6,9 @@ import org.example.storage.Collection;
 import java.util.Comparator;
 
 public class ShowMaxCreationDateElement implements Command{
+    /**
+     * @return любой объект из коллекции, значение поля creationDate которого является максимальным
+     */
     @Override
     public String execute() {
         return Collection.getInstance()

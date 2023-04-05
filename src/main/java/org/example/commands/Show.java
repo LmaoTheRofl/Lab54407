@@ -6,6 +6,9 @@ import org.example.storage.Collection;
 import java.util.stream.Collectors;
 
 public class Show implements Command{
+    /**
+     * @return в стандартный поток вывода все элементы коллекции в строковом представлении
+     */
     @Override
     public String execute() {
         return Collection.getInstance()

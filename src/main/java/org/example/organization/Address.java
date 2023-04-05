@@ -9,6 +9,14 @@ public class Address {
         this.town = town;
     }
 
+    public String getStreet() {
+        return street;
+    }
+
+    public Location getTown() {
+        return town;
+    }
+
     @Override
     public String toString() {
         return "Address{" +

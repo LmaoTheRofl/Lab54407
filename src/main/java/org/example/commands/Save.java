@@ -12,6 +12,10 @@ import java.util.ArrayDeque;
 import java.util.Scanner;
 
 public class Save implements Command{
+    /**
+     *  сохранить коллекцию в файл
+     * @return saved
+     */
     @Override
     public String execute() {
         Scanner scanner = new Scanner(System.in);
