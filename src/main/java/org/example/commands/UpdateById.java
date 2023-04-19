@@ -1,5 +1,6 @@
 package org.example.commands;
 
+import org.example.organization.Organization;
 import org.example.storage.Collection;
 
 import java.util.Scanner;
@@ -13,9 +14,14 @@ public class UpdateById implements Command{
     public String execute() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите id");
+        while(true) {
         long x = scanner.nextLong();
-        Collection.getInstance().updateById(x);
-        return "Element updated";
+        for(Organization organization : Collection.getInstance().getAll()) {
+            if(x == organization.getId()){
+                Collection.getInstance().updateById(x);
+                return "Element updated";
+            }}
+            System.out.println("Нет такого id");}
     }
 
     @Override

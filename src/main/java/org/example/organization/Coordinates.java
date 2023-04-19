@@ -1,11 +1,14 @@
 package org.example.organization;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Класс координат
  */
 public class Coordinates {
-    // Поле [ранящее значение x
-    private float x; //Поле не может быть null
+    @Expose(serialize = true)
+    private float x;
+    @Expose(serialize = true)
     private long y; //Максимальное значение поля: 274
 
     public Coordinates(float x, long y) {

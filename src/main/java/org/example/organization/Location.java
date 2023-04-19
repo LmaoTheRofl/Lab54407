@@ -1,8 +1,13 @@
 package org.example.organization;
 
+import com.google.gson.annotations.Expose;
+
 public class Location {
+    @Expose(serialize = true)
     private double x;
+    @Expose(serialize = true)
     private double y;
+    @Expose(serialize = true)
     private int z;
 
     public Location(double x, double y, int z) {

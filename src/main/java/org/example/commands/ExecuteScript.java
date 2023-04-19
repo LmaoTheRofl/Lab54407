@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class ExecuteScript implements Command{
     /**
-     * считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
+     * Cчитать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
      * @return Script executed!
      */
     @Override
@@ -17,6 +17,7 @@ public class ExecuteScript implements Command{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter filename with script");
         String filename = scanner.nextLine();
+        if (CommandHandler.script_rec<3){
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(filename));
             String script = new BufferedReader(inputStreamReader).lines().collect(Collectors.joining("\n"));
@@ -25,10 +26,9 @@ public class ExecuteScript implements Command{
             for (String command : commands) {
                 System.out.println(commandHandler.execute(command));
             }
-
         } catch (IOException e) {
             return "incorrect filename!";
-        }
+        }}
 
         return "Script executed!";
     }

@@ -1,6 +1,18 @@
 package org.example.commands;
 
+import org.example.organization.Organization;
+import org.example.organization.OrganizationType;
 import org.example.storage.Collection;
+import org.example.utils.IOHandler;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.example.organization.OrganizationType.TRUST;
+import static org.example.organization.OrganizationType.PUBLIC;
+import static org.example.organization.OrganizationType.COMMERCIAL;
 
 public class GroupCountingByType implements Command{
     /**
@@ -10,7 +22,29 @@ public class GroupCountingByType implements Command{
     @Override
     public String execute() {
         Collection.getInstance().sortByType();
-        return "Collection sorted";
+        List<OrganizationType> presentTRUSTTypes = new ArrayList<OrganizationType>();
+        List<OrganizationType> presentPUBLICTypes = new ArrayList<OrganizationType>();
+        List<OrganizationType> presentCOMMERCIALTypes = new ArrayList<OrganizationType>();
+        int counterTRUST = 0;
+        int counterPUBLIC = 0;
+        int counterCOMMERCIAL = 0;
+        for(Organization organization : Collection.getInstance().getAll() ){
+            if(organization.getType().equals(TRUST)) {
+                presentTRUSTTypes.add(organization.getType());}
+            else if(organization.getType().equals(PUBLIC)) {
+                presentPUBLICTypes.add(organization.getType());}
+            else {
+                presentCOMMERCIALTypes.add(organization.getType());}
+
+        }
+        System.out.println("TRUST: "+presentTRUSTTypes.toArray().length);
+        System.out.println("PUBLIC: "+presentPUBLICTypes.toArray().length);
+        System.out.println("COMMERCIAL: "+presentCOMMERCIALTypes.toArray().length);
+        return Collection.getInstance()
+                .getAll()
+                .stream()
+                .map(Organization::toString)
+                .collect(Collectors.joining("\n"));
     }
 
     @Override

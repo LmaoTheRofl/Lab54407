@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 public class Collection {
     private ArrayDeque<Organization> collection;
-
     private static Collection INSTANCE;
 
     public static Collection getInstance() {
@@ -65,8 +64,6 @@ public class Collection {
      * @return результат валидации
      */
     private boolean validate(Organization organization) {
-        if (organization.getId() == null || organization.getId() <= 0) {
-            return false;}
         if(organization.getName().trim().isEmpty()) {
             return false;}
         if(organization.getCoordinates().getY() > 274){
@@ -100,14 +97,24 @@ public class Collection {
     public ArrayDeque<Organization> getAll() {
         return collection;
     }
-    public void removeById(long id) {
-        collection.removeIf(e -> String.valueOf(e.getId()).equals(String.valueOf(id)));
-    }
-    public void updateById(long id) {
-        collection.removeIf(e -> String.valueOf(e.getId()).equals(String.valueOf(id)));
-         Organization organization = Utils.readOrganization();
-         organization.setId(id);
-        collection.add(organization);
+    public void removeById(long x) {
+       TreeSet<Long> idCounter = new TreeSet<>();
+        Long id = Long.valueOf(1);
+        collection.removeIf(e -> String.valueOf(e.getId()).equals(String.valueOf(x)));
+        for(Organization organization : collection) {
+                     while (!idCounter.add(id)) {
+                          id++;
+                   }
+                      organization.setId(id);}
+
+
+        }
+
+    public void updateById(long x) {
+                collection.removeIf(e -> String.valueOf(e.getId()).equals(String.valueOf(x)));
+                Organization object = Utils.readOrganization();
+                object.setId(x);
+                collection.add(object);
     }
 
     public void add(Organization organization) {
@@ -119,8 +126,14 @@ public class Collection {
         List<Organization> x = new ArrayList<Organization>(collection).stream().sorted(Comparator.comparing(Organization::getAnnualTurnover)).collect(Collectors.toList());
       y.addAll(x);
         this.collection = y;
-
 }
+    public void sortById() {
+        try {ArrayDeque<Organization>  y = new ArrayDeque<Organization>();
+        List<Organization> x = new ArrayList<Organization>(collection).stream().sorted(Comparator.comparing(Organization::getId)).collect(Collectors.toList());
+        y.addAll(x);
+        this.collection = y;}
+        catch(NullPointerException e) {}
+    }
 public void sortByType() {
     ArrayDeque<Organization>  y = new ArrayDeque<Organization>();
     List<Organization> x = new ArrayList<Organization>(collection).stream().sorted(Comparator.comparing(Organization::getType)).collect(Collectors.toList());
@@ -129,7 +142,7 @@ public void sortByType() {
 }
 
     private Long generateId() {
-        Long id = collection.stream()
+        Long id =  collection.stream()
                 .map(Organization::getId)
                 .max(Comparator.comparing(Long::longValue))
                 .orElse(0L);

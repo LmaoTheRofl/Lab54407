@@ -1,14 +1,23 @@
 package org.example.organization;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.Date;
 
 public class Organization {
-    private Long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    @Expose(serialize = false) //файл не должен содержать id по условию
+    private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    @Expose(serialize = true)
     private String name; //Поле не может быть null, Строка не может быть пустой
+    @Expose(serialize = true)
     private Coordinates coordinates; //Поле не может быть null
+    @Expose(serialize = true)
     private java.util.Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    @Expose(serialize = true)
     private long annualTurnover; //Значение поля должно быть больше 0
+    @Expose(serialize = true)
     private OrganizationType type; //Поле не может быть null
+    @Expose(serialize = true)
     private Address officialAddress; //Поле не может быть null
 
     public Organization(long id, String name, Coordinates coordinates, Date creationDate, long annualTurnover, OrganizationType type, Address officialAddress) {

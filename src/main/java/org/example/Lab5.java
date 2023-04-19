@@ -19,8 +19,11 @@ public class Lab5 {
         collection.print();
 
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
+      while (scanner.hasNextLine()) {
             System.out.println(commandHandler.execute(scanner.nextLine()));
+            collection.sortById();
         }
+
+
     }
 }
