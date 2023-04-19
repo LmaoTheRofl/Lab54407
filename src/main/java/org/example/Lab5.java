@@ -20,7 +20,7 @@ public class Lab5 {
 
         Scanner scanner = new Scanner(System.in);
       while (scanner.hasNextLine()) {
-            System.out.println(commandHandler.execute(scanner.nextLine()));
+            System.out.println(commandHandler.execute(scanner.nextLine().toLowerCase()));
             collection.sortById();
         }
 
