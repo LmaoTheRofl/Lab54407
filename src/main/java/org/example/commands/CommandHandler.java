@@ -28,15 +28,14 @@ static int script_rec = 0;
      * @return command.execute()
      */
     public String execute(String commandLine) {
-        try { for (Command command : commands) {
+        for (Command command : commands) {
             if (command.getCommandName().equals(commandLine)) {
                 if(command.getCommandName().equals("execute_script")) {
                     script_rec += 1;
                 }
                 return command.execute();
             }
-        }}
-        catch(NullPointerException e) {}
+        }
 
         return "Incorrect commandName!\n" + new Help().execute();
     }
