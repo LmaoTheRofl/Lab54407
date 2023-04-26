@@ -5,6 +5,7 @@ import org.example.organization.OrganizationType;
 import org.example.storage.Collection;
 import org.example.utils.IOHandler;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +38,9 @@ public class GroupCountingByType implements Command{
                 presentCOMMERCIALTypes.add(organization.getType());}
 
         }
+        System.out.println(Arrays.toString(presentTRUSTTypes.toArray()));
+        System.out.println(Arrays.toString(presentPUBLICTypes.toArray()));
+        System.out.println(Arrays.toString(presentCOMMERCIALTypes.toArray()));
         System.out.println("TRUST: "+presentTRUSTTypes.toArray().length);
         System.out.println("PUBLIC: "+presentPUBLICTypes.toArray().length);
         System.out.println("COMMERCIAL: "+presentCOMMERCIALTypes.toArray().length);
